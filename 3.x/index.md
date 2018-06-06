@@ -17,8 +17,8 @@ lib:
 
 ## Requirements
 
-* PHP 7.0 or higher
-* [PSR-7 Http Message]
+* PHP ^7.0
+* [PSR-7 Http Message] ^1.0
 
 ## Installation
 
