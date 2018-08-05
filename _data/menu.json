@@ -7,6 +7,16 @@
                     "title": "About",
                     "url": "/3.x/",
                     "description": "About this library"
+                },
+                {
+                    "title": "HTTP Requests",
+                    "url": "/3.x/http-requests.html",
+                    "description": "Learn how to represent HTTP requests"
+                },
+                {
+                    "title": "HTTP Responses",
+                    "url": "/3.x/http-responses.html",
+                    "description": "Learn how to represent HTTP responses"
                 }
             ]
         }

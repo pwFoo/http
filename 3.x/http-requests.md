@@ -1,0 +1,161 @@
+---
+layout: project
+version: 3.x
+title: HTTP Requests
+---
+# HTTP Requests
+
+* [Instantiation](#instantiation)
+* [Working with request headers](#working-with-request-headers)
+* [Handling cookies](#handling-cookies)
+
+
+## Instantiation
+
+An HTTP request is represented with the help of the `Opis\Http\Request` class.
+The simplest way to instantiate a request object, is by calling the `fromGlobals` static method.
+
+```php
+use Opis\Http\Request;
+
+$request = Request::fromGlobals();
+```
+
+You could also instantiate the request object yourself, by passing a series of arguments to its constructor.
+To better understand what each of the arguments mean, let's take a look to the constructor's signature.
+
+```php
+/**
+ * Constructor
+ */
+public function __construct(
+    string $method = 'GET',
+    string $requestTarget = '/',
+    string $protocolVersion = 'HTTP/1.1',
+    bool $secure = false,
+    array $headers = [],
+    array $files = [],
+    ?IStream $body = null,
+    ?array $cookies = null,
+    ?array $query = null,
+    ?array $formData = null
+);
+```
+
+* `$method`  - represents the HTTP method used in this request. Typical values for this argument are: 
+`GET`, `POST`, `PUT`, `DELETE`, and `OPTIONS`
+* `$requestTarget` - the request URI, usually in the form of an absolute path, optionally followed by a query string
+* `$protocolVersion` - the HTTP's version
+* `$secure` - tells if the request was made using a secure connection or not
+* `$headers` - a key-value mapped array, where the key represents the header name, and the
+value represents the actual value of the header. If the `$requestTarget` is a form of an absolute path,
+then the list of headers must contain a `Host` entry.
+* `$files` - a list of uploaded files. Each uploaded files is represented by using an object that implements the 
+`Opis\Http\IUploadedFile` interface. You can use the `Opis\Http\UploadedFile::parseFiles` method to obtain such
+a list from the `$_FILES` global variable.
+* `$body` - this arguments represents the request's body, if present. If you omit this argument, or pass `null`, 
+then its value will be automatically determined.
+* `$cookies` - a list of parsed cookies or the `$_COOKIE` global variable itself. If the argument is omitted or
+`null` is passed as a value, then the value of `$cookies` will be automatically determined from `$headers`.
+* `$query` - a list of query parameters or the `$_GET` global variable itself. If this argument is omitted or
+`null` is passed as a value, then the value of `$query` will be automatically determined from `$requestTarget`.
+* `$formData` - a list of submitted values or the `$_POST` global variable itself. If this argument is omitted or
+`null` is passed as a value, then the value of `$formData` will be automatically determined from `$body`.
+
+## Working with request headers
+
+Reading the full list of request headers is done by using the `getHeaders` method.
+
+```php
+$headers = $request->getHeaders();
+```
+
+Checking if a particular header exists is done by using the `hasHeader` method.
+The name of the header you want to check is case insensitive.
+
+```php
+if ($request->hasHeader('Content-Type')) {
+    // do something
+}
+```
+
+Reading the value of a header is also very easy: just pass the name
+of the header (case insensitive) to the `getHeader` method.
+If the header doesn't exist, then `null` will be returned.
+You can specify a custom return value, if the header doesn't exist, by passing a second argument to the method.
+
+```php
+$value = $request->getHeader('Content-Type');
+
+// Custom return value
+$value = $request->getHeader('Content-Type', 'text/html');
+```
+
+## Handling cookies
+
+You can read the full list of cookies by using the `getCookies` method.
+
+```php
+$cookies = $request->getCookies();
+```
+
+Checking if a cookies exists is done with the help of the `hasCookie` method.
+
+```php
+if ($request->hasCookie('foo')) {
+    // do something
+}
+```
+
+The `getCookie` method can be used to read the value of a cookie. 
+If the cookie doesn't exist, `null` is returned instead.
+
+```php
+$cookie = $request->getCookie('foo');
+```
+
+By default, the value of the cookie is URL-decoded. To suppress this behavior, simply pass `false` as the second
+argument to the `getCookie` method.
+
+```php
+$cookie = $request->getCookie('foo', false);
+```
+
+## Handling user-submitted data
+
+When we are talking about **from submitted data**, we are referring to those requests that were sent using the **POST** 
+method, have a body and have a **Content-Type** header whose value is set to **application/x-www-form-urlencoded**. 
+{:.alert.alert-info}
+
+Reading all the fields submitted by a user, with the help of a form, is accomplished by using the `getFormData` method.
+
+```php
+$data = $request->getFormData();
+```
+
+Reading individual field values is done by using the `formData` method and passing the field's name as an argument.
+
+```php
+// Read username
+$username = $request->formData('username');
+
+// Read password
+$password = $request->formData('password');
+```
+
+If the field doesn't exist, `null` is returned instead, as a fallback value. 
+You can specify a custom fallback value by passing a second argument to the method.
+
+```php
+// Custom fallback value
+$website = $request->formData('website', 'https://example.com');
+```
+
+If the data submitted by an user was not sent with the help of a form, you can use the `getBody` method to access
+the stream object that will help you read the data.
+
+```php
+$data = $request->getBody();
+
+$json = json_decode($data->readyToEnd());
+```
