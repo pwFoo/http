@@ -8,7 +8,12 @@ title: HTTP Requests
 * [Instantiation](#instantiation)
 * [Working with request headers](#working-with-request-headers)
 * [Handling cookies](#handling-cookies)
-
+* [Handling user-submitted data](#handling-user-submitted-data)
+    * [Form data](#form-data)
+    * [Raw body](#raw-body)
+    * [Query params](#query-params)
+    * [File uploads](#file-uploads)
+* [Other methods](#other-methods)
 
 ## Instantiation
 
@@ -127,6 +132,8 @@ When we are talking about **from submitted data**, we are referring to those req
 method, have a body and have a **Content-Type** header whose value is set to **application/x-www-form-urlencoded**. 
 {:.alert.alert-info}
 
+### Form data
+
 Reading all the fields submitted by a user, with the help of a form, is accomplished by using the `getFormData` method.
 
 ```php
@@ -151,6 +158,8 @@ You can specify a custom fallback value by passing a second argument to the meth
 $website = $request->formData('website', 'https://example.com');
 ```
 
+### Raw body
+
 If the data submitted by an user was not sent with the help of a form, you can use the `getBody` method to access
 the stream object that will help you read the data.
 
@@ -158,4 +167,86 @@ the stream object that will help you read the data.
 $data = $request->getBody();
 
 $json = json_decode($data->readyToEnd());
+```
+
+### Query params
+
+Getting the full list of query params is done with the help of the `getQuery` method.
+
+```php
+$query = $request->getQuery();
+```
+
+Reading individual query params is done with the help of the `query` method.
+If the query param doesn't exist, `null` is returned instead, as a fallback value.
+
+```php
+$page = $request->query('page');
+```
+
+You can specify a custom fallback value by passing a second argument to the method.
+
+```php
+// Custom fallback value
+$page = $request->query('page', 1);
+```
+
+### File uploads
+
+You can use the `getUploadedFile` method to obtain the full list of uploaded files.
+
+```php
+$files = $request->getUploadedFiles();
+```
+
+Getting a specific file is done by using the `file` method. The method will return an object
+that implements the `Opis\Http\IUploadedFile` interface, or `null` if the file doesn't exist.
+
+```php
+$file = $request->file('picture');
+
+if ($file !== null) {
+    $file->moveTo('/some/path/picture.jpg');
+}
+```
+
+## Other methods
+
+Reading the method that was used for a particular request is done by using the `getMethod` method.
+
+```php
+if ('GET' !== $request->getMethod()) {
+    // do something
+}
+```
+
+The `getProtocolVersion` method can be used to find out what's the HTTP version used for this request.
+
+```php
+$value = $request->getProtocolVersion();
+```
+
+You can use the `isSecure` method to find out if a request was made using a secure connection or not.
+
+```php
+if (!$request->isSecure()) {
+    // Handle request
+}
+```
+
+Reading the request target is done with the help of the `getRequestTarget` method.
+
+```php
+echo $request->getRequestTarget();
+```
+
+You can obtain a full URI of the request by using the `getUri` method.
+The method will return an instance of `Opis\Http\Uri` class.
+
+```php
+$uri = $request->getUri();
+
+if ($uri->getPath() === '/hello') {
+    // do something
+}
 ```
