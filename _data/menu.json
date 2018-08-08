@@ -17,6 +17,11 @@
                     "title": "HTTP Responses",
                     "url": "/3.x/http-responses.html",
                     "description": "Learn how to represent HTTP responses"
+                },
+                {
+                    "title": "Response types",
+                    "url": "/3.x/response-types.html",
+                    "description": "Learn about different response types"
                 }
             ]
         }
