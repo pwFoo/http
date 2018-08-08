@@ -9,6 +9,8 @@ title: HTTP Responses
 * [Immutability](#immutability)
 * [Working with response headers](#working-with-response-headers)
 * [Handling cookies](#handling-cookies)
+* [Response body](#response-body)
+* [Other methods](#other-methods)
 
 ## Instantiation
 
@@ -184,3 +186,50 @@ $response = $response->modify(function(Response $response){
     $response->clearCookies();
 });
 ```
+
+## Response body
+
+You can access the response body by calling the `getBody` method. This method returns an instance of `Opis\Http\Stream`,
+or `null` if the response message has no body.
+
+```php
+if (null !== $body = $response->getBody()) {
+    // do something
+}
+```
+
+You can set the response body by calling the `setBody` method.
+
+```php
+$response = $response->modify(function(Response $response){
+    $response->setBody(null);
+    // or
+    $response->setBody(new Stream("php://temp", "wb+"));
+});
+```
+
+## Other methods
+
+Reading the protocol version number is done by using the `getProtocolVersion` method.
+You can modify the protocol version number by calling the `setProtocolVersion` method.
+
+```php
+$version = $response->getProtocolVersion();
+
+$response = $response->modify(function(Response $response){
+    $response->setProtocolVersion('HTTP/1.1');
+});
+```
+
+Modifying the response status code is done by using the `setStatusCode` method.
+You can read the current status code with the help of the `getStatusCode` method.
+
+```php
+$code = $response->getStatusCode();
+
+$response = $response->modify(function(Response $response){
+    $response->setStatusCode(200);
+});
+```
+
+
