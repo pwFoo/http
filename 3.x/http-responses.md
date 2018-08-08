@@ -8,6 +8,7 @@ title: HTTP Responses
 * [Instantiation](#instantiation)
 * [Immutability](#immutability)
 * [Working with response headers](#working-with-response-headers)
+* [Handling cookies](#handling-cookies)
 
 ## Instantiation
 
@@ -156,14 +157,30 @@ if ($response->hasCookie('foo', '/some/path/')) {
     // do something
 }
 
-if ($response->hasCookie('foo', '', 'app.domain.com')) {
+if ($response->hasCookie('foo', '', 'www.domain.com')) {
     // do something
 }
 
-if ($response->hasCookie('foo', '/some/path/', 'app.domain.com')) {
+if ($response->hasCookie('foo', '/some/path/', 'www.domain.com')) {
     // do something
 }
 ```
 
-Removing a cookie is
+Removing a cookie is done by using the `clearCookie` method.
 
+```php
+$response = $response->modify(function(Response $response){
+    $response->clearCookie('foo');
+    $response->clearCookie('foo', '/some/path/');
+    $response->clearCookie('foo', '', 'www.domain.com');
+    $response->clearCookie('foo', '/some/path/', 'www.domain.com');
+});
+```
+
+You can remove all cookies by using the `clearCookies` method;
+
+```php
+$response = $response->modify(function(Response $response){
+    $response->clearCookies();
+});
+```
