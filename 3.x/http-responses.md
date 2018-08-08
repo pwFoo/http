@@ -146,6 +146,27 @@ Getting the full list of cookies is done by calling the `getCookies` method.
 $cookeis = $response->getCookies();
 ```
 
+Reading an individual cookie is done by using the `getCookie` method. You can specify
+a custom path or domain on which the cookie was set.
+
+```php
+if ($response->getCookie('foo')) {
+    // do something
+}
+
+if ($response->getCookie('foo', '/some/path/')) {
+    // do something
+}
+
+if ($response->getCookie('foo', '', 'www.domain.com')) {
+    // do something
+}
+
+if ($response->getCookie('foo', '/some/path/', 'www.domain.com')) {
+    // do something
+}
+```
+
 If you want to check if a cookie was set or not, simply use the `hasCookie` method.
 You can optionally specify a domain and a path, and check if a cookie was set for the
 specified domain and path. 
