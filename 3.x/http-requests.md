@@ -36,7 +36,7 @@ To better understand what each of the arguments mean, let's take a look to the c
 public function __construct(
     string $method = 'GET',
     string $requestTarget = '/',
-    string $protocolVersion = 'HTTP/1.1',
+    string $protocolVersion = '1.1',
     bool $secure = false,
     array $headers = [],
     array $files = [],

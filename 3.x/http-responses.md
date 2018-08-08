@@ -23,7 +23,7 @@ public function __construct(
     int $statusCode = 200, 
     array $headers = [], 
     IStream $body = null, 
-    string $protocolVersion = 'HTTP/1.1'
+    string $protocolVersion = '1.1'
 );
 ```
 
@@ -238,7 +238,7 @@ You can modify the protocol version number by calling the `setProtocolVersion` m
 $version = $response->getProtocolVersion();
 
 $response = $response->modify(function(Response $response){
-    $response->setProtocolVersion('HTTP/1.1');
+    $response->setProtocolVersion('1.0');
 });
 ```
 
