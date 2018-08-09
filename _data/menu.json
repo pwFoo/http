@@ -7,21 +7,51 @@
                     "title": "About",
                     "url": "/3.x/",
                     "description": "About this library"
+                }
+            ]
+        },
+        {
+            "title": "The basics",
+            "pages": [
+                {
+                    "title": "HTTP Messages",
+                    "url": "/3.x/http-messages.html",
+                    "description": ""
                 },
                 {
-                    "title": "HTTP Requests",
-                    "url": "/3.x/http-requests.html",
+                    "title": "Requests",
+                    "url": "/3.x/requests.html",
                     "description": "Learn how to represent HTTP requests"
                 },
                 {
-                    "title": "HTTP Responses",
-                    "url": "/3.x/http-responses.html",
+                    "title": "Responses",
+                    "url": "/3.x/responses.html",
                     "description": "Learn how to represent HTTP responses"
-                },
+                }
+            ]
+        },
+        {
+            "title": "In-depth",
+            "pages": [
                 {
                     "title": "Response types",
                     "url": "/3.x/response-types.html",
                     "description": "Learn about different response types"
+                },
+                {
+                    "title": "Streams",
+                    "url": "/3.x/streams.html",
+                    "description": ""
+                },
+                {
+                    "title": "File uploads",
+                    "url": "/3.x/file-uploads.html",
+                    "description": ""
+                },
+                {
+                    "title": "URIs",
+                    "url": "/3.x/uris.html",
+                    "description": ""
                 }
             ]
         }

@@ -3,13 +3,12 @@ layout: project
 version: 3.x
 title: HTTP Responses
 ---
-# HTTP Responses
+# Responses
 
 * [Instantiation](#instantiation)
 * [Immutability](#immutability)
-* [Working with response headers](#working-with-response-headers)
-* [Handling cookies](#handling-cookies)
-* [Response body](#response-body)
+* [Adding new headers](#adding-new-headers)
+* [Cookies](#cookies)
 * [Other methods](#other-methods)
 
 ## Instantiation
@@ -50,7 +49,7 @@ $response = $response->modify(function(Response $response){
 });
 ```
 
-## Working with response headers
+## Adding new headers
 
 Adding a new header is done with the help of the `setHeader` method.
 Because of the immutable nature of the response object, trying to call this method
@@ -78,35 +77,7 @@ $response = $response->modify(function(Response $response){
 });
 ```
 
-Getting the full list of header is done by calling the `getHeaders` method.
-
-```php
-$headers = $response->getHeaders();
-```
-
-Reading an individual header is done by passing the header's name to the `getHeader` method.
-If the header was not set, `null` will be returned, by default. 
-
-```php
-$header = $response->getHeader('Content-Type');
-```
-
-If you want to change the default value returned if the specified header was not found, then you must
-simply pass a second argument to the `getHeader` method.
-
-```php
-$header = $response->getHeader('Content-Type', 'text/html');
-```
-
-Checking if a header was set, is done by using the `hasHeader` method.
-
-```php
-if ($response->hasHeader('Content-Type')) {
-    // do something
-}
-```
-
-## Handling cookies
+## Cookies
 
 Setting a new cookie is done with the help of the `setCookie` method.
 
@@ -208,16 +179,7 @@ $response = $response->modify(function(Response $response){
 });
 ```
 
-## Response body
-
-You can access the response body by calling the `getBody` method. This method returns an instance of `Opis\Http\Stream`,
-or `null` if the response message has no body.
-
-```php
-if (null !== $body = $response->getBody()) {
-    // do something
-}
-```
+## Other methods
 
 You can set the response body by calling the `setBody` method.
 
@@ -229,14 +191,9 @@ $response = $response->modify(function(Response $response){
 });
 ```
 
-## Other methods
-
-Reading the protocol version number is done by using the `getProtocolVersion` method.
 You can modify the protocol version number by calling the `setProtocolVersion` method.
 
 ```php
-$version = $response->getProtocolVersion();
-
 $response = $response->modify(function(Response $response){
     $response->setProtocolVersion('1.0');
 });

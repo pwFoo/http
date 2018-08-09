@@ -3,12 +3,11 @@ layout: project
 version: 3.x
 title: HTTP Requests
 ---
-# HTTP Requests
+# Requests
 
 * [Instantiation](#instantiation)
-* [Working with request headers](#working-with-request-headers)
-* [Handling cookies](#handling-cookies)
-* [Handling user-submitted data](#handling-user-submitted-data)
+* [Cookies](#cookies)
+* [User-submitted data](#user-submitted-data)
     * [Form data](#form-data)
     * [Raw body](#raw-body)
     * [Query params](#query-params)
@@ -67,36 +66,7 @@ then its value will be automatically determined.
 * `$formData` - a list of submitted values or the `$_POST` global variable itself. If this argument is omitted or
 `null` is passed as a value, then the value of `$formData` will be automatically determined from `$body`.
 
-## Working with request headers
-
-Reading the full list of request headers is done by using the `getHeaders` method.
-
-```php
-$headers = $request->getHeaders();
-```
-
-Checking if a particular header exists is done by using the `hasHeader` method.
-The name of the header you want to check is case insensitive.
-
-```php
-if ($request->hasHeader('Content-Type')) {
-    // do something
-}
-```
-
-Reading the value of a header is also very easy: just pass the name
-of the header (case insensitive) to the `getHeader` method.
-If the header doesn't exist, then `null` will be returned.
-You can specify a custom return value, if the header doesn't exist, by passing a second argument to the method.
-
-```php
-$value = $request->getHeader('Content-Type');
-
-// Custom return value
-$value = $request->getHeader('Content-Type', 'text/html');
-```
-
-## Handling cookies
+## Cookies
 
 You can read the full list of cookies by using the `getCookies` method.
 
@@ -126,7 +96,7 @@ argument to the `getCookie` method.
 $cookie = $request->getCookie('foo', false);
 ```
 
-## Handling user-submitted data
+## User-submitted data
 
 When we are talking about **from submitted data**, we are referring to those requests that were sent using the **POST** 
 method, have a body and have a **Content-Type** header whose value is set to **application/x-www-form-urlencoded**. 
@@ -220,12 +190,6 @@ if ('GET' !== $request->getMethod()) {
 }
 ```
 
-The `getProtocolVersion` method can be used to find out what's the HTTP version used for this request.
-
-```php
-$value = $request->getProtocolVersion();
-```
-
 You can use the `isSecure` method to find out if a request was made using a secure connection or not.
 
 ```php
@@ -240,7 +204,7 @@ Reading the request target is done with the help of the `getRequestTarget` metho
 echo $request->getRequestTarget();
 ```
 
-You can obtain a full URI of the request by using the `getUri` method.
+You can also obtain a full URI of the request by using the `getUri` method.
 The method will return an instance of `Opis\Http\Uri` class.
 
 ```php
