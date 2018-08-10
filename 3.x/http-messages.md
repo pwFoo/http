@@ -19,7 +19,11 @@ are implemented in the `Opis\Http\Message` abstract class.
 The constructor of the `Message` class has the following signature:
 
 ```php
-public function __construct(?IStream $body = null, array $headers = [], string $protocolVersion = '1.1');
+public function __construct(
+    ?IStream $body = null, 
+    array $headers = [], 
+    string $protocolVersion = '1.1'
+);
 ```
 
 * `$body` - the message body. It must be an instance of a stream or `null`
