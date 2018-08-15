@@ -10,7 +10,7 @@ lib:
 # HTTP abstraction layer
 
 **Opis Http** is a library that provides an object-oriented representation for HTTP requests and responses.
-It was designed to be small, efficient, and easy to use, no matter of the size of your project.
+The library was designed to be small, efficient, and easy to work with.
 
 ## License
 
