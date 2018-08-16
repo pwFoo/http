@@ -5,14 +5,13 @@
     "version": "3.0.0",
     "url": "/http",
     "chapters": true,
-    "copyright": {
-        "owner": "The Opis Project",
-        "start": "2017",
-        "end": "2018"
-    },
+    "copyright": "2018 Zindex Software",
     "title_suffix": " | Opis Http",
     "ga": false,
-    "logo": "/assets/v2/logo.svg",
+    "brand": {
+        "logo": "/assets/v2/logo.svg",
+        "title": "opis"
+    },
     "favicon": "/assets/v2/favicon.png",
     "classes": {
         "body": "d-flex flex-column",
