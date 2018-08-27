@@ -10,7 +10,8 @@
     "ga": false,
     "brand": {
         "logo": "/assets/v2/logo.svg",
-        "title": "opis"
+        "title": "opis",
+        "url": "https://www.opis.io/http"
     },
     "favicon": "/assets/v2/favicon.png",
     "classes": {
