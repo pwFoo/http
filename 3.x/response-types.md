@@ -31,7 +31,7 @@ public function __construct(
 * `$status` - response status code
 * `$headers` - a list of headers
 
-By default, this class automatically ads a `Content-Length` header to the response.
+By default, this class automatically adds a `Content-Length` header to the response.
 
 ```php
 use Opis\Http\Responses\StringResponse;
@@ -55,11 +55,11 @@ public function __construct(
 );
 ```
 
-* `$body` - a string or an instance of `Opis\Http\IStream`
+* `$body` - a string or an instance of `Opis\Stream\IStream`
 * `$status` - response status code
 * `$headers` - a list of headers
 
-By default, this class automatically ads a `Content-Length` and a `Content-Type` header to the response.
+By default, this class automatically adds a `Content-Length` and a `Content-Type` header to the response.
 
 ```php
 use Opis\Http\Responses\HtmlResponse;
@@ -84,12 +84,12 @@ public function __construct(
 );
 ```
 
-* `json` - a string or an instance of `Opis\Http\IStream`
+* `json` - a string or an instance of `Opis\Stream\IStream`
 * `$status` - response status code
 * `$headers` - a list of headers
 * `$encodeOptions` - encoding options that will be passed to the `json_encode` method.
 
-By default, this class automatically ads a `Content-Length` and a `Content-Type` header to the response.
+By default, this class automatically adds a `Content-Length` and a `Content-Type` header to the response.
 
 ```php
 use Opis\Http\Responses\JsonResponse;
@@ -119,7 +119,7 @@ to be automatically determined based on the file's extension
 * `$status` - response status code
 * `$headers` - a list of headers
 
-By default, this class automatically ads a `Content-Length` and a `Content-Type` header to the response.
+By default, this class automatically adds a `Content-Length` and a `Content-Type` header to the response.
 
 ```php
 use Opis\Http\Responses\FileStream;
@@ -148,7 +148,7 @@ public function __construct(
 * `$status` - response status code
 * `$headers` - a list of headers
 
-By default, this class automatically ads a `Content-Length`, a `Content-Type`, and a `Content-Disposition` 
+By default, this class automatically adds a `Content-Length`, a `Content-Type`, and a `Content-Disposition` 
 header to the response.
 
 ```php
@@ -177,7 +177,7 @@ public function __construct(
 * `$status` - response status code
 * `$headers` - a list of headers
 
-By default, this class automatically ads a `Location` header to the response.
+By default, this class automatically adds a `Location` header to the response.
 
 ```php
 use Opis\Http\Responses\RedirectResponse;

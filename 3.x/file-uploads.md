@@ -32,7 +32,7 @@ One of the use-cases for this method, is when you want to move the uploaded file
 $picture = $request->file('profile_picture');
 
 // To stream
-$picture->moveToStream(new Stream('ftp:///path/to/file.jpg', 'w'));
+$picture->moveToStream(new \Opis\Stream\Stream('ftp:///path/to/file.jpg', 'w'));
 ```
 
 If the file was already moved and you call the `moveToStream` or `moveToFile` method, an exception

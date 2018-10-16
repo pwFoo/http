@@ -11,8 +11,8 @@ title: Streams
 
 ## Overview
 
-An HTTP message body is represented with the help of a stream object that implements the `Opis\Http\IStream` interface.
-A default implementation of this interface is provided by the `Opis\Http\Stream` class.
+An HTTP message body is represented with the help of a stream object that implements the `Opis\Stream\IStream` interface.
+A default implementation of this interface is provided by the `Opis\Stream\Stream` class.
 The stream interface provides various methods that allow developers to work with native PHP streams 
 in an object-oriented manner. Streams are also used when working with uploaded files, being a convenient way of handling
 large amount of data.
@@ -39,10 +39,10 @@ if ($stream->isSeekable()) {
 
 ## Stream info
 
-Obtaining the size of a stream (in bytes), is done with the help of the `getSize` method.
+Obtaining the size of a stream (in bytes), is done with the help of the `size` method.
 
 ```php
-if ($stream->getSize() > 1024 * 1024) {
+if ($stream->size() > 1024 * 1024) {
     // do something
 }
 ``` 
@@ -64,20 +64,20 @@ $position = $stream->tell();
 To check if the cursor position is at the end of the stream, use the `eof` method.
 
 ```php
-if ($stream->eof()) {
+if ($stream->isEOF()) {
     // do something
 }
 ``` 
 
-You can obtain an array of metadata by using the `getMetadata` method. Obtaining a specific key from de array,
+You can obtain an array of metadata by using the `metadata` method. Obtaining a specific key from de array,
 is done by passing the key's name as an argument to the method. 
 More information about the supported metadata keys can be found [here][0].
 
 ```php
 // An array of metadata
-$info = $stream->getMetadata();
+$info = $stream->metadata();
 // Get stream's URI
-$uri = $stream->getMetadata('uri');
+$uri = $stream->metadata('uri');
 ```
 
 ## Stream operations

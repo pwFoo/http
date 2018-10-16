@@ -39,7 +39,7 @@ public function __construct(
     bool $secure = false,
     array $headers = [],
     array $files = [],
-    ?IStream $body = null,
+    ?\Opis\Stream\IStream $body = null,
     ?array $cookies = null,
     ?array $query = null,
     ?array $formData = null

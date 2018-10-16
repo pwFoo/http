@@ -21,7 +21,7 @@ The constructor of the class has the following signature.
 public function __construct(
     int $statusCode = 200, 
     array $headers = [], 
-    IStream $body = null, 
+    \Opis\Stream\IStream $body = null, 
     string $protocolVersion = '1.1'
 );
 ```
@@ -187,7 +187,7 @@ You can set the response body by calling the `setBody` method.
 $response = $response->modify(function(Response $response){
     $response->setBody(null);
     // or
-    $response->setBody(new Stream("php://temp", "wb+"));
+    $response->setBody(new \Opis\Stream\Stream("php://temp", "wb+"));
 });
 ```
 

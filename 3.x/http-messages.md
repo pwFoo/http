@@ -20,7 +20,7 @@ The constructor of the `Message` class has the following signature:
 
 ```php
 public function __construct(
-    ?IStream $body = null, 
+    ?\Opis\Stream\IStream $body = null, 
     array $headers = [], 
     string $protocolVersion = '1.1'
 );
